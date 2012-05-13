@@ -5,5 +5,20 @@
   xmlns:sqlos="http://namespaces.sqlobject.org/sqlos"
   xmlns:five="http://namespaces.zope.org/five">
 
+  <!--The Posts tab on the group page-->
+  <browser:viewlet name="gs-group-messages-posts-tab"
+    manager="gs.group.home.interfaces.IGroupHomepageTasks"
+    template="browser/templates/poststab.pt"
+    class=".poststab.PostsTab"
+    permission="zope2.Public"
+    weight="5"
+    title="Posts" />
+  <!--The JavaScript to drive the Posts tab-->
+  <browser:viewlet name="gs-group-messages-posts-script"
+    manager="gs.group.home.interfaces.IGroupHomepageScripts"
+    template="browser/templates/postsscript.pt"
+    class="gs.group.home.simpletab.PublicTab"
+    permission="zope2.Public"
+    title="Posts Script" />
 </configure>
 
