@@ -9,7 +9,7 @@ GSGroupPostsTab = function () {
     var latestPosts = null;
     var loadingMessage = null;
     // Search Info
-    var ajaxPage = 'messages/postsSummary.html';
+    var ajaxPage = 'gs-group-messages-posts-ajax.html';
     var offset = null;
     var limit = null;
     var toolbarShown = true;
