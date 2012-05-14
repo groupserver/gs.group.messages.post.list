@@ -1,0 +1,49 @@
+<div id="gs-group-messages-posts-ajax-response"
+  tal:define="munge_date python:modules['Products.XWFCore.XWFUtils'].munge_date;">
+  <table id="gs-group-messages-posts-ajax-response">
+    <thead>
+      <tr>
+        <th class="author">Author</th>
+        <th class="topic">Topic</th>
+        <th class="files">Files</th>
+        <th class="date">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tal:block repeat="result view/posts">
+        <tr tal:define="n repeat/result/number;
+          odd python:n%2;
+          class python:odd and 'odd' or 'even';"
+          tal:attributes="id string:post-${result/postId};
+            class class;">
+          <td class="author">
+            <a tal:omit-tag="not:result/author/exists" class="name"
+              tal:attributes="href result/author/url;
+              title string:Profile of ${result/author/name};"
+              tal:content="result/author/name">Me!</a>
+          </td>
+          <td class="topic">
+            <a tal:condition="result/topicName"
+              tal:attributes="href string:/r/post/${result/postId}"
+              tal:content="python:result['topicName'][:50]">A Topic</a>
+          </td>
+          <td class="files">
+            <tal:block tal:repeat="file result/files">
+              <a href="#" title="foo"
+                tal:define="icon python:file['mime_type'].replace('/','-').replace('.','-')"
+                tal:attributes="title file/file_name;
+                  href string:/r/post/${result/postId};
+                  class string:fileIcon ${icon}">&#160;</a>
+            </tal:block>
+          </td>
+          <td class="date" 
+            tal:define="ctx result/context"
+            tal:content="python:munge_date(ctx, result['date'])">
+            Today, Tomorrow, Timaru
+          </td>
+        </tr>
+      </tal:block>
+    </tbody>
+  </table>
+</div><!--gs-group-messages-posts-ajax-response-->
+

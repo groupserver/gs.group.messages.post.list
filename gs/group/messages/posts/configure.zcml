@@ -24,6 +24,11 @@
     name="gs-group-messages-posts-js-20120514.js"
     file="browser/javascript/posts.js"
     permission="zope2.Public" />
-
+  <!--The page that returns the posts to the tab. -->
+  <browser:page name="gs-group-messages-posts-ajax.html"
+    for="gs.group.base.interfaces.IGSGroupMarker"
+    template="browser/templates/ajax.pt"
+    class=".ajax.PostsAjax"
+    permission="zope2.View"/>
 </configure>
 
