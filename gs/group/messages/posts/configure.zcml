@@ -11,7 +11,7 @@
     template="browser/templates/poststab.pt"
     class=".poststab.PostsTab"
     permission="zope2.Public"
-    weight="5"
+    weight="0"
     title="Posts" />
   <!--The JavaScript to drive the Posts tab-->
   <browser:viewlet name="gs-group-messages-posts-script"

@@ -12,8 +12,8 @@
     <tbody>
       <tal:block repeat="post view/posts">
         <tr tal:define="n repeat/post/number;
-          odd python:n%2;
-          class python:odd and 'odd' or 'even';"
+          oe python:(n%2 and 'odd') or 'even';
+          class string:post ${oe}"
           tal:attributes="id string:post-${post/post_id};
             class string:post-summary ${class};">
           <td class="topic">
