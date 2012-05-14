@@ -93,7 +93,7 @@ GSGroupPostsTab = function () {
     // Public methods and properties.
     return {
         init: function (groupId) {
-            limit = 6;
+            limit = 12;
             offset = 0;
         
             init_prev_button();
