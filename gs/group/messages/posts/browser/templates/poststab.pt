@@ -1,6 +1,6 @@
 <div id="gs-group-messages-posts">
   <tal:block condition="view/viewTopics">
-    <p id="gs-group-messages-posts-loading">
+    <p id="gs-group-messages-posts-loading" style="display:none;">
       <img style="margin:0px 0.69em 0px 0px;padding:0px;"
         src="/++resource++anim/wait.gif"/> 
       Loading the posts
