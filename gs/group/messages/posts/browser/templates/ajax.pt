@@ -10,35 +10,35 @@
       </tr>
     </thead>
     <tbody>
-      <tal:block repeat="result view/posts">
-        <tr tal:define="n repeat/result/number;
+      <tal:block repeat="post view/posts">
+        <tr tal:define="n repeat/post/number;
           odd python:n%2;
           class python:odd and 'odd' or 'even';"
-          tal:attributes="id string:post-${result/postId};
-            class class;">
-          <td class="author">
-            <a tal:omit-tag="not:result/author/exists" class="name"
-              tal:attributes="href result/author/url;
-              title string:Profile of ${result/author/name};"
-              tal:content="result/author/name">Me!</a>
-          </td>
+          tal:attributes="id string:post-${post/post_id};
+            class string:post-summary ${class};">
           <td class="topic">
-            <a tal:condition="result/topicName"
-              tal:attributes="href string:/r/post/${result/postId}"
-              tal:content="python:result['topicName'][:50]">A Topic</a>
+            <a tal:condition="post/subject"
+              tal:attributes="href string:/r/post/${post/post_id}"
+              tal:content="python:post['subject'][:50]">A Topic</a>
+          </td>
+          <td class="author">
+            <a tal:omit-tag="not:post/author/exists" class="name"
+              tal:attributes="href post/author/url;
+              title string:Profile of ${post/author/name};"
+              tal:content="post/author/name">Me!</a>
           </td>
           <td class="files">
-            <tal:block tal:repeat="file result/files">
+            <tal:block tal:repeat="file post/files">
               <a href="#" title="foo"
                 tal:define="icon python:file['mime_type'].replace('/','-').replace('.','-')"
                 tal:attributes="title file/file_name;
-                  href string:/r/post/${result/postId};
+                  href string:/r/post/${post/post_id};
                   class string:fileIcon ${icon}">&#160;</a>
             </tal:block>
           </td>
           <td class="date" 
-            tal:define="ctx result/context"
-            tal:content="python:munge_date(ctx, result['date'])">
+            tal:define="ctx view/context; d post/date"
+            tal:content="python:munge_date(ctx, d)">
             Today, Tomorrow, Timaru
           </td>
         </tr>

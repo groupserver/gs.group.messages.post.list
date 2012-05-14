@@ -81,8 +81,6 @@ GSGroupPostsTab = function () {
         nPosts = latestPosts.find('.post').length;
         nextButton.button('option', 'disabled', nPosts < limit);
         
-        init_keywords();
-        
         if ((offset <= 0) && (nPosts < limit) && toolbarShown) {
             toolbar.fadeOut('fast', FADE_METHOD);
             toolbarShown = false;

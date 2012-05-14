@@ -27,7 +27,14 @@ class PostsSearch(object):
     def loggedInUser(self):
         retval = createObject('groupserver.LoggedInUser', self.context)
         return retval
-        
+
+    @Lazy
+    def da(self):
+        assert self.context
+        retval = self.context.zsqlalchemy
+        assert retval
+        return retval        
+
     @Lazy
     def messageQuery(self):
         retval  = MessageQuery(self.context, self.da)
@@ -49,20 +56,20 @@ class PostsSearch(object):
         assert type(retval) == list
         return retval
     
-    def author_for_post(post):
+    def author_for_post(self, post):
         uid = post['user_id']
-        authorInfo = authorCache.get(uid, None)
+        authorInfo = self.authorCache.get(uid)
         if not authorInfo:
             authorInfo = createObject('groupserver.UserFromId', 
                                         self.context, uid)
-            authorCache[uid] = authorInfo
-        authorId = authorInfo.id
-        retval = {
-          'id':     authorInfo.id,
-          'exists': not authorInfo.anonymous,
-          'url':    authorInfo.url,
-          'name':   authorInfo.name,
-        }
-        assert type(retval) == dict
-        return retval
+            authorId = authorInfo.id
+            authorInfo = {
+              'id':     authorInfo.id,
+              'exists': not authorInfo.anonymous,
+              'url':    authorInfo.url,
+              'name':   authorInfo.name,
+            }
+            self.authorCache.add(uid, authorInfo)
+        assert type(authorInfo) == dict
+        return authorInfo
 
