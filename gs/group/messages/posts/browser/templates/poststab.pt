@@ -16,5 +16,11 @@
         <button id="gs-group-messages-posts-toolbar-next">Older</button>
       </span>
     </div><!--gs-group-messages-posts-toolbar-->
+    <div id="gs-group-messages-posts-tasks">
+      <ul class="inline-list">
+        <li><a href="messages/posts.html">The <strong>posts</strong> 
+            page</a></li>
+      </ul>
+    </div><!--gs-group-messages-posts-tasks-->
   </tal:block>
 </div><!--gs-group-messages-posts-->
