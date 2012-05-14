@@ -20,5 +20,10 @@
     class="gs.group.home.simpletab.PublicTab"
     permission="zope2.Public"
     title="Posts Script" />
+  <browser:resource 
+    name="gs-group-messages-posts-js-20120514.js"
+    file="browser/javascript/posts.js"
+    permission="zope2.Public" />
+
 </configure>
 

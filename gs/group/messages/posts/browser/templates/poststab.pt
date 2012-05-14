@@ -1,3 +1,20 @@
 <div id="gs-group-messages-posts">
-  <p>I am a fish.</p>
+  <tal:block condition="view/viewTopics">
+    <p id="gs-group-messages-posts-loading">
+      <img style="margin:0px 0.69em 0px 0px;padding:0px;"
+        src="/++resource++anim/wait.gif"/> 
+      Loading the posts
+    </p><!--gs-group-messages-posts-loading-->
+    <div id="gs-group-messages-posts-latest" 
+      style="display:none;">
+      &#160;
+    </div><!--gs-group-messages-posts-latest-->
+    <div id="gs-group-messages-posts-toolbar">
+      <span class="ui-widget-header ui-corner-all"
+        style="padding: 0.692em;">
+        <button id="gs-group-messages-posts-toolbar-prev">Newer</button>
+        <button id="gs-group-messages-posts-toolbar-next">Older</button>
+      </span>
+    </div><!--gs-group-messages-posts-toolbar-->
+  </tal:block>
 </div><!--gs-group-messages-posts-->
