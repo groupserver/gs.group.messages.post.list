@@ -16,16 +16,16 @@
           class string:post ${oe}"
           tal:attributes="id string:post-${post/post_id};
             class string:post-summary ${class};">
-          <td class="topic">
-            <a tal:condition="post/subject"
-              tal:attributes="href string:/r/post/${post/post_id}"
-              tal:content="python:post['subject'][:50]">A Topic</a>
-          </td>
           <td class="author">
             <a tal:omit-tag="not:post/author/exists" class="name"
               tal:attributes="href post/author/url;
               title string:Profile of ${post/author/name};"
               tal:content="post/author/name">Me!</a>
+          </td>
+          <td class="topic">
+            <a tal:condition="post/subject"
+              tal:attributes="href string:/r/post/${post/post_id}"
+              tal:content="python:post['subject'][:50]">A Topic</a>
           </td>
           <td class="files">
             <tal:block tal:repeat="file post/files">
