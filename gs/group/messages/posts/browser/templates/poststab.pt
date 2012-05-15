@@ -20,6 +20,11 @@
       <ul class="inline-list">
         <li><a href="messages/posts.html">The <strong>posts</strong> 
             page</a></li>
+        <li><a type="application/atom+xml" class="alternateATOM"
+          tal:define="title string:Posts in ${view/groupInfo/name};
+            url string:/s/search.atom?t=0&amp;f=0&amp;p=1&amp;g=${view/groupInfo/id}"
+          tal:attributes="href url" href="#">Web feed</a></li>
+
       </ul>
     </div><!--gs-group-messages-posts-tasks-->
   </tal:block>
