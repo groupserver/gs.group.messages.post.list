@@ -30,5 +30,13 @@
     template="browser/templates/ajax.pt"
     class=".ajax.PostsAjax"
     permission="zope2.View"/>
+  <!--The link to the Web Feed -->
+  <browser:viewlet name="gs-group-messages-posts-link"
+    manager="gs.group.home.interfaces.IGroupHomepageMetadata"
+    template="browser/templates/link.pt"
+    class="gs.group.home.simpletab.PublicTab"
+    permission="zope2.View"
+    weight="20"
+    title="Posts Link" />
 </configure>
 
