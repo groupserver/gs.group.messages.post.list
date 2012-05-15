@@ -1,6 +1,6 @@
 // GroupServer module for providing the Posts tab in a group.
 jQuery.noConflict();
-GSGroupPostsTab = function () {
+var GSGroupPostsTab = function () {
     // Private variables
     // Widgets
     var toolbar = null;
@@ -92,7 +92,7 @@ GSGroupPostsTab = function () {
 
     // Public methods and properties.
     return {
-        init: function (groupId) {
+        init: function () {
             limit = 12;
             offset = 0;
         
@@ -106,7 +106,7 @@ GSGroupPostsTab = function () {
             load_posts();
         },//init
     };
-}(); // GSVerifyEmailAddress
+}(); // GSGroupPostsTab
 jQuery(document).ready( function () {
     GSGroupPostsTab.init()
 });
