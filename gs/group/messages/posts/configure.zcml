@@ -19,6 +19,7 @@
     template="browser/templates/postsscript.pt"
     class="gs.group.home.simpletab.PublicTab"
     permission="zope2.Public"
+    weight="20"
     title="Posts Script" />
   <browser:resource 
     name="gs-group-messages-posts-js-20120514.js"
