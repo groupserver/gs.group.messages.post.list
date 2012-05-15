@@ -1,17 +1,15 @@
 <div id="gs-group-messages-posts">
   <tal:block condition="view/viewTopics">
-    <p id="gs-group-messages-posts-loading" style="display:none;">
-      <img style="margin:0px 0.69em 0px 0px;padding:0px;"
-        src="/++resource++anim/wait.gif"/> 
+    <p id="gs-group-messages-posts-loading" 
+      class="loading-message">
+      <img src="/++resource++anim/wait.gif"/> 
       Loading the posts
     </p><!--gs-group-messages-posts-loading-->
-    <div id="gs-group-messages-posts-latest" 
-      style="display:none;">
+    <div id="gs-group-messages-posts-latest" class="items-list">
       &#160;
     </div><!--gs-group-messages-posts-latest-->
-    <div id="gs-group-messages-posts-toolbar">
-      <span class="ui-widget-header ui-corner-all"
-        style="padding: 0.692em;">
+    <div id="gs-group-messages-posts-toolbar" class="toolbar">
+      <span class="ui-widget-header ui-corner-all">
         <button id="gs-group-messages-posts-toolbar-prev">Newer</button>
         <button id="gs-group-messages-posts-toolbar-next">Older</button>
       </span>
