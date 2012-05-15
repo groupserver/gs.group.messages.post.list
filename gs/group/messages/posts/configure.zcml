@@ -39,5 +39,13 @@
     permission="zope2.View"
     weight="20"
     title="Posts Link" />
+    
+  <!-- The Posts page (the firehose) -->
+  <browser:page 
+    for="Products.XWFMailingListManager.interfaces.IGSMessagesFolder" 
+    name="posts.html"
+    class=".posts.PostsView"
+    template="browser/templates/posts.pt" 
+    permission="zope2.View" />
 </configure>
 
