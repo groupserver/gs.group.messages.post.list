@@ -1,4 +1,13 @@
-<script type="text/javascript"
-  src="/++resource++gs-group-messages-posts-js-20120514.js"
-  id="gs-group-messages-posts-script">&#160;</script>
+<div id="gs-group-messages-posts-script">
+  <script type="text/javascript"
+	  src="/++resource++search-20120601.js">&#160;</script>
+  <script type="text/javascript">
+    jQuery.noConflict();
+    jQuery(document).ready( function () {
+        GSSearch.init('#gs-group-messages-posts-search', 
+                      'gs-group-messages-posts-ajax.html', 0, 0, '');
+        GSSearch.load();
+    });
+  </script>
+</div><!--gs-group-messages-posts-script-->
 
