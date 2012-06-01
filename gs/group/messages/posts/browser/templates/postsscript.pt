@@ -4,11 +4,11 @@
   <script type="text/javascript">
     jQuery.noConflict();
     jQuery(document).ready( function () {
-        var s = GSSearch('#gs-group-messages-posts-search', 
-                         'gs-group-messages-posts-ajax.html', 
-                         0, 12, '', null);
-        s.load();
+        var postsSearch = null;
+        postsSearch = GSSearch('#gs-group-messages-posts-search', 
+                              'gs-group-messages-posts-ajax.html', 
+                               0, 12, {}, null);
+        postsSearch.load();
     });
   </script>
 </div><!--gs-group-messages-posts-script-->
-
