@@ -22,7 +22,7 @@
     weight="20"
     title="Posts Script" />
   <browser:resource 
-    name="gs-group-messages-posts-js-20120514.js"
+    name="gs-group-messages-posts-js-20120601.js"
     file="browser/javascript/posts.js"
     permission="zope2.Public" />
   <!--The page that returns the posts to the tab. -->
