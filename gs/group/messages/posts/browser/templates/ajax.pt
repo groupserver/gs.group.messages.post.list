@@ -13,7 +13,7 @@
       <tal:block repeat="post view/posts">
         <tr tal:define="n repeat/post/number;
           oe python:(n%2 and 'odd') or 'even';
-          class string:post ${oe}"
+          class string:post ${oe} result"
           tal:attributes="id string:post-${post/post_id};
             class string:post-summary ${class};">
           <td class="author">

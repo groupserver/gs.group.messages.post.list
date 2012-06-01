@@ -5,7 +5,7 @@
     jQuery.noConflict();
     jQuery(document).ready( function () {
         GSSearch.init('#gs-group-messages-posts-search', 
-                      'gs-group-messages-posts-ajax.html', 0, 0, '');
+                      'gs-group-messages-posts-ajax.html', 0, 12, '', null);
         GSSearch.load();
     });
   </script>
