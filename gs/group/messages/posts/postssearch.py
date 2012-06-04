@@ -8,8 +8,9 @@ class PostsSearch(object):
 
     authorCache = LRUCache("Author")
 
-    def __init__(self, group, limit, offset):
+    def __init__(self, group, searchTokens, limit, offset):
         self.context = self.group = group
+        self.searchTokens = searchTokens
         self.limit = limit
         self.offset = offset
 
@@ -49,8 +50,7 @@ class PostsSearch(object):
 
     @Lazy
     def rawPostInfo(self):
-        searchTokens = createObject('groupserver.SearchTextTokens', '')
-        retval = self.messageQuery.post_search_keyword(searchTokens,
+        retval = self.messageQuery.post_search_keyword(self.searchTokens,
               self.siteInfo.id, [self.groupInfo.id], [],
               limit=self.limit, offset=self.offset)
         assert type(retval) == list
@@ -72,4 +72,3 @@ class PostsSearch(object):
             self.authorCache.add(uid, authorInfo)
         assert type(authorInfo) == dict
         return authorInfo
-

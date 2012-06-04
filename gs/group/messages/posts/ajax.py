@@ -26,8 +26,13 @@ class PostsAjax(GroupPage):
         assert retval >= 0
         return retval
 
+    @Lazy
+    def searchTokens(self):
+        s = self.request.get('s', '')
+        return createObject('groupserver.SearchTextTokens', s)
+
     def posts(self):
         '''Generator, which returns the posts'''
-        ps = PostsSearch(self.context, self.limit, self.offset)
+        ps = PostsSearch(self.context, self.searchTokens, self.limit, 
+                         self.offset)
         return ps.posts()
-
