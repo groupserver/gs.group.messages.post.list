@@ -1,9 +1,7 @@
 <div id="gs-group-messages-posts-script"
      tal:condition="view/viewTopics">
-  <script type="text/javascript"
-	  src="/++resource++search-20120601.js">
-    &#160;
-  </script>
+  <script src="/++resource++search-20120601.js"
+	  type="text/javascript" >&#160;</script>
   <script type="text/javascript"
 	  src="/++resource++gs-group-messages-posts-js-20120601.js">
     &#160;
