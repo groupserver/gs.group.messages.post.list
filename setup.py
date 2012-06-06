@@ -35,8 +35,9 @@ setup(name='gs.group.messages.posts',
         'gs.content.js.jquery',
         'gs.group.base',
         'gs.group.home',
-        'gs.group.member.canpost',
+        'gs.group.messages.base',
         'Products.GSGroup',
+        'Products.GSSearch',
         # -*- Extra requirements: -*-
     ],
     entry_points="""
