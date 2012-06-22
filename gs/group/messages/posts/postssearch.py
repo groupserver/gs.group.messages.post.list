@@ -30,15 +30,8 @@ class PostsSearch(object):
         return retval
 
     @Lazy
-    def da(self):
-        assert self.context
-        retval = self.context.zsqlalchemy
-        assert retval
-        return retval        
-
-    @Lazy
     def messageQuery(self):
-        retval  = MessageQuery(self.context, self.da)
+        retval  = MessageQuery(self.context)
         return retval
 
     def posts(self):
