@@ -4,10 +4,19 @@ import sqlalchemy as sa
 from gs.database import getTable, getSession
 
 
+def to_unicode(s):
+    u'''Ensure that a string (s) is in Unicode.'''
+    # TODO: Make "to_unicode" a generic utility
+    retval = s
+    if not isinstance(s, unicode):
+        retval = unicode(s, 'utf-8')
+    return retval
+
 class PostSearchQuery(object):
 
     def __init__(self):
         self.postTable = getTable('post')
+        self.fileTable = getTable('file')
 
     def add_standard_where_clauses(self, statement, table,
                                    site_id, group_ids, hidden):
@@ -23,9 +32,13 @@ class PostSearchQuery(object):
             #  exclusive.
             statement.append_whereclause(table.c.group_id == '')
             statement.append_whereclause(table.c.group_id != '')
+        print statement
+        print
         if not(hidden):
             # We normally want to exclude hidden posts and topics.
-            statement.append_whereclause(table.c.hidden is None)  # works??
+            statement.append_whereclause(table.c.hidden == None)  # lint:ok
+        print statement
+        print
         return statement
 
     def add_search_where_clauses(self, statement, searchTokens):
@@ -38,8 +51,31 @@ class PostSearchQuery(object):
             # --=mpj17=-- Note that the following call to the "match()" method
             #    is one of the reasons that GroupServer *requires* PostgreSQL.
             statement.append_whereclause(pt.c.fts_vectors.match(q))
-            print statement
+        print statement
         return statement
+
+    def files_metadata(self, post_id):
+        u""" Retrieve the metadata of all files associated with this post.
+
+            Returns:
+                [{'file_id': ID, 'mime_type': String,
+                 'file_name': String, 'file_size': Int}]
+             or
+                []"""
+        ft = self.fileTable
+        statement = ft.select()
+        statement.append_whereclause(ft.c.post_id == post_id)
+
+        session = getSession()
+        r = session.execute(statement)
+        retval = []
+        if r.rowcount:
+            retval = [{'file_id': row['file_id'],
+                       'file_name': to_unicode(row['file_name']),
+                       'date': row['date'],
+                       'mime_type': to_unicode(row['mime_type']),
+                       'file_size': row['file_size']} for row in r]
+        return retval
 
     def search(self, searchTokens, site_id, group_ids=[], limit=12, offset=0):
         u'''Search the posts for the tokens in "searchTokens".'''
