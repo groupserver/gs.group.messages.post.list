@@ -2,15 +2,8 @@
 u'''The queries for searching all posts in a group.'''
 import sqlalchemy as sa
 from gs.database import getTable, getSession
+from utils import to_unicode
 
-
-def to_unicode(s):
-    u'''Ensure that a string (s) is in Unicode.'''
-    # TODO: Make "to_unicode" a generic utility
-    retval = s
-    if not isinstance(s, unicode):
-        retval = unicode(s, 'utf-8')
-    return retval
 
 class PostSearchQuery(object):
 
