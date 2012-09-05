@@ -1,0 +1,7 @@
+{
+  "venv": "", 
+  "project-type": "Import from sources", 
+  "name": "gs.group.messages.posts", 
+  "license": "GNU General Public License v3", 
+  "description": "Search and display all posts in a group."
+}
