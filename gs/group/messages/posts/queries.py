@@ -4,7 +4,7 @@ import sqlalchemy as sa
 from gs.database import getTable, getSession
 
 
-class PostQuery(object):
+class PostSearchQuery(object):
 
     def __init__(self):
         self.postTable = getTable('post')
@@ -28,8 +28,7 @@ class PostQuery(object):
             statement.append_whereclause(table.c.hidden is None)  # works??
         return statement
 
-    def __add_post_keyword_search_where_clauses(self, statement,
-                                                  searchTokens):
+    def add_search_where_clauses(self, statement, searchTokens):
         """Post searching is easier than topic searching, as there is no
           natural join between the topic and post tables."""
         pt = self.postTable
@@ -39,33 +38,33 @@ class PostQuery(object):
             # --=mpj17=-- Note that the following call to the "match()" method
             #    is one of the reasons that GroupServer *requires* PostgreSQL.
             statement.append_whereclause(pt.c.fts_vectors.match(q))
+            print statement
         return statement
 
-    def post_search_keyword(self, searchTokens, site_id, group_ids=[],
-                            limit=12, offset=0):
+    def search(self, searchTokens, site_id, group_ids=[], limit=12, offset=0):
+        u'''Search the posts for the tokens in "searchTokens".'''
         pt = self.postTable
         cols = [pt.c.post_id.distinct(), pt.c.user_id, pt.c.group_id,
                   pt.c.subject, pt.c.date, pt.c.body, pt.c.has_attachments]
         statement = sa.select(cols, limit=limit, offset=offset,
                   order_by=sa.desc(pt.c.date))
 
-        self.add_standard_where_clauses(statement, pt, site_id,
-            group_ids, False)
-        statement = self.__add_post_keyword_search_where_clauses(statement,
-          searchTokens)
+        self.add_standard_where_clauses(statement, pt, site_id, group_ids,
+                                        False)
+        statement = self.add_search_where_clauses(statement, searchTokens)
 
         session = getSession()
         r = session.execute(statement)
         retval = []
         for x in r:
             p = {
-              'post_id':          x['post_id'],
-              'user_id':          x['user_id'],
-              'group_id':         x['group_id'],
-              'subject':          x['subject'],
-              'date':             x['date'],
-              'body':             x['body'],
-              'files_metadata':   x['has_attachments']
+              'post_id': x['post_id'],
+              'user_id': x['user_id'],
+              'group_id': x['group_id'],
+              'subject': x['subject'],
+              'date': x['date'],
+              'body': x['body'],
+              'files_metadata': x['has_attachments']
                                   and self.files_metadata(x['post_id'])
                                   or [],
               }

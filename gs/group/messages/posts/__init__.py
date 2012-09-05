@@ -1,2 +1,2 @@
 # coding=utf-8
-from queries import PostQuery  # lint:ok
+from queries import PostSearchQuery  # lint:ok
