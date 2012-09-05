@@ -3,7 +3,7 @@ from zope.cachedescriptors.property import Lazy
 from zope.component import createObject
 from Products.XWFCore.cache import LRUCache
 from Products.GSSearch.queries import MessageQuery
-# TODO: use the query from gs.group.messages.posts.queries
+from queries import PostSearchQuery
 
 
 class PostsSearch(object):
@@ -33,19 +33,32 @@ class PostsSearch(object):
 
     @Lazy
     def messageQuery(self):
-        retval  = MessageQuery(self.context)
+        retval = MessageQuery(self.context)
+        return retval
+
+    @Lazy
+    def postSearchQuery(self):
+        retval = PostSearchQuery()
         return retval
 
     def posts(self):
         posts = self.rawPostInfo
         for post in posts:
-            post['files']   =   post['files_metadata']
-            post['author']  =   self.author_for_post(post)
+            post['files'] = post['files_metadata']
+            post['author'] = self.author_for_post(post)
             yield post
 
     @Lazy
-    def rawPostInfo(self):
+    def oldRawPostInfo(self):
         retval = self.messageQuery.post_search_keyword(self.searchTokens,
+              self.siteInfo.id, [self.groupInfo.id], [],
+              limit=self.limit, offset=self.offset)
+        assert type(retval) == list
+        return retval
+
+    @Lazy
+    def rawPostInfo(self):
+        retval = self.postSearchQuery.search(self.searchTokens,
               self.siteInfo.id, [self.groupInfo.id], [],
               limit=self.limit, offset=self.offset)
         assert type(retval) == list
@@ -57,12 +70,11 @@ class PostsSearch(object):
         if not authorInfo:
             authorInfo = createObject('groupserver.UserFromId',
                                         self.context, uid)
-            authorId = authorInfo.id
             authorInfo = {
-              'id':     authorInfo.id,
+              'id': authorInfo.id,
               'exists': not authorInfo.anonymous,
-              'url':    authorInfo.url,
-              'name':   authorInfo.name,
+              'url': authorInfo.url,
+              'name': authorInfo.name,
             }
             self.authorCache.add(uid, authorInfo)
         assert type(authorInfo) == dict
