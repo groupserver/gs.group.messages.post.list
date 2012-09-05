@@ -3,6 +3,8 @@ from zope.cachedescriptors.property import Lazy
 from zope.component import createObject
 from Products.XWFCore.cache import LRUCache
 from Products.GSSearch.queries import MessageQuery
+# TODO: use the query from gs.group.messages.posts.queries
+
 
 class PostsSearch(object):
 
@@ -48,12 +50,12 @@ class PostsSearch(object):
               limit=self.limit, offset=self.offset)
         assert type(retval) == list
         return retval
-    
+
     def author_for_post(self, post):
         uid = post['user_id']
         authorInfo = self.authorCache.get(uid)
         if not authorInfo:
-            authorInfo = createObject('groupserver.UserFromId', 
+            authorInfo = createObject('groupserver.UserFromId',
                                         self.context, uid)
             authorId = authorInfo.id
             authorInfo = {
