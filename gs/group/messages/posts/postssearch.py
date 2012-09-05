@@ -59,8 +59,7 @@ class PostsSearch(object):
     @Lazy
     def rawPostInfo(self):
         retval = self.postSearchQuery.search(self.searchTokens,
-              self.siteInfo.id, [self.groupInfo.id], [],
-              limit=self.limit, offset=self.offset)
+              self.siteInfo.id, [self.groupInfo.id], self.limit, self.offset)
         assert type(retval) == list
         return retval
 
