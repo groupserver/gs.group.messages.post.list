@@ -25,26 +25,9 @@ class PostSearchQuery(object):
             #  exclusive.
             statement.append_whereclause(table.c.group_id == '')
             statement.append_whereclause(table.c.group_id != '')
-        print statement
-        print
         if not(hidden):
             # We normally want to exclude hidden posts and topics.
             statement.append_whereclause(table.c.hidden == None)  # lint:ok
-        print statement
-        print
-        return statement
-
-    def add_search_where_clauses(self, statement, searchTokens):
-        """Post searching is easier than topic searching, as there is no
-          natural join between the topic and post tables."""
-        pt = self.postTable
-
-        if searchTokens.keywords:  # --=mpj17=-- Change to phrases
-            q = '&'.join(searchTokens.keywords)
-            # --=mpj17=-- Note that the following call to the "match()" method
-            #    is one of the reasons that GroupServer *requires* PostgreSQL.
-            statement.append_whereclause(pt.c.fts_vectors.match(q))
-        print statement
         return statement
 
     def files_metadata(self, post_id):
@@ -80,10 +63,17 @@ class PostSearchQuery(object):
 
         self.add_standard_where_clauses(statement, pt, site_id, group_ids,
                                         False)
-        statement = self.add_search_where_clauses(statement, searchTokens)
 
         session = getSession()
-        r = session.execute(statement)
+        if searchTokens.keywords:  # --=mpj17=-- Change to phrases
+            # --=mpj17=-- Note that the following call to the "match()" method
+            #    is one of the reasons that GroupServer *requires* PostgreSQL.
+            #statement.append_whereclause(pt.c.fts_vectors.match(q))
+            statement.append_whereclause("post.fts_vectors @@ to_tsquery(:kw)")
+            k = '&'.join(searchTokens.keywords)
+            r = session.execute(statement, params={'kw': k})
+        else:
+            r = session.execute(statement)
         retval = []
         for x in r:
             p = {
