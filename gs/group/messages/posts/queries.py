@@ -11,11 +11,11 @@ class PostSearchQuery(object):
         self.postTable = getTable('post')
         self.fileTable = getTable('file')
 
-    def add_standard_where_clauses(self, statement, table,
-                                   site_id, group_ids, hidden):
-        statement.append_whereclause(table.c.site_id == site_id)
+    def add_standard_where_clauses(self, statement, site_id, group_ids,
+                                    hidden):
+        statement.append_whereclause(self.postTable.c.site_id == site_id)
         if group_ids:
-            inStatement = table.c.group_id.in_(group_ids)
+            inStatement = self.postTable.c.group_id.in_(group_ids)
             statement.append_whereclause(inStatement)
         else:
             # --=mpj17=-- No, I am not smoking (much) crack. If the
@@ -23,11 +23,11 @@ class PostSearchQuery(object):
             #  all cases. However, I cannot append "False" to the
             #  statement, so I append two items that are mutually
             #  exclusive.
-            statement.append_whereclause(table.c.group_id == '')
-            statement.append_whereclause(table.c.group_id != '')
+            statement.append_whereclause(self.postTable.c.group_id == '')
+            statement.append_whereclause(self.postTable.c.group_id != '')
         if not(hidden):
             # We normally want to exclude hidden posts and topics.
-            statement.append_whereclause(table.c.hidden == None)  # lint:ok
+            statement.append_whereclause(self.postTable.c.hidden == None)  # lint:ok
         return statement
 
     def files_metadata(self, post_id):
@@ -53,7 +53,15 @@ class PostSearchQuery(object):
                        'file_size': row['file_size']} for row in r]
         return retval
 
-    def search(self, searchTokens, site_id, group_ids=[], limit=12, offset=0):
+    def add_search_where_clauses(self, statement, searchTokens):
+        if searchTokens.keywords:  # --=mpj17=-- Change to phrases
+            # --=mpj17=-- Note that the following call to the "match()" method
+            #    is one of the reasons that GroupServer *requires* PostgreSQL.
+            q = '&'.join(searchTokens.keywords)
+            m = self.postTable.c.fts_vectors.match(q)
+            statement.append_whereclause(m)
+
+    def search(self, searchTokens, site_id, group_ids, limit=12, offset=0):
         u'''Search the posts for the tokens in "searchTokens".'''
         pt = self.postTable
         cols = [pt.c.post_id.distinct(), pt.c.user_id, pt.c.group_id,
@@ -61,19 +69,11 @@ class PostSearchQuery(object):
         statement = sa.select(cols, limit=limit, offset=offset,
                   order_by=sa.desc(pt.c.date))
 
-        self.add_standard_where_clauses(statement, pt, site_id, group_ids,
-                                        False)
+        self.add_standard_where_clauses(statement, site_id, group_ids, False)
+        self.add_search_where_clauses(statement, searchTokens)
 
         session = getSession()
-        if searchTokens.keywords:  # --=mpj17=-- Change to phrases
-            # --=mpj17=-- Note that the following call to the "match()" method
-            #    is one of the reasons that GroupServer *requires* PostgreSQL.
-            #statement.append_whereclause(pt.c.fts_vectors.match(q))
-            statement.append_whereclause("post.fts_vectors @@ to_tsquery(:kw)")
-            k = '&'.join(searchTokens.keywords)
-            r = session.execute(statement, params={'kw': k})
-        else:
-            r = session.execute(statement)
+        r = session.execute(statement)
         retval = []
         for x in r:
             p = {
