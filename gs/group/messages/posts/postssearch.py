@@ -2,7 +2,6 @@
 from zope.cachedescriptors.property import Lazy
 from zope.component import createObject
 from Products.XWFCore.cache import LRUCache
-from Products.GSSearch.queries import MessageQuery
 from queries import PostSearchQuery
 
 
@@ -32,11 +31,6 @@ class PostsSearch(object):
         return retval
 
     @Lazy
-    def messageQuery(self):
-        retval = MessageQuery(self.context)
-        return retval
-
-    @Lazy
     def postSearchQuery(self):
         retval = PostSearchQuery()
         return retval
@@ -47,14 +41,6 @@ class PostsSearch(object):
             post['files'] = post['files_metadata']
             post['author'] = self.author_for_post(post)
             yield post
-
-    @Lazy
-    def oldRawPostInfo(self):
-        retval = self.messageQuery.post_search_keyword(self.searchTokens,
-              self.siteInfo.id, [self.groupInfo.id], [],
-              limit=self.limit, offset=self.offset)
-        assert type(retval) == list
-        return retval
 
     @Lazy
     def rawPostInfo(self):

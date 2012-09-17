@@ -5,6 +5,7 @@ from AccessControl import getSecurityManager
 from gs.group.base.page import GroupPage
 from postssearch import PostsSearch
 
+
 class PostsAjax(GroupPage):
     @Lazy
     def viewTopics(self):
@@ -13,13 +14,13 @@ class PostsAjax(GroupPage):
         user = getSecurityManager().getUser()
         retval = bool(user.has_permission('View', msgs))
         return retval
-        
+
     @Lazy
     def offset(self):
         retval = int(self.request.get('i', 0))
         assert retval >= 0
         return retval
-    
+
     @Lazy
     def limit(self):
         retval = int(self.request.get('l', 6)) % 48
@@ -33,6 +34,6 @@ class PostsAjax(GroupPage):
 
     def posts(self):
         '''Generator, which returns the posts'''
-        ps = PostsSearch(self.context, self.searchTokens, self.limit, 
+        ps = PostsSearch(self.context, self.searchTokens, self.limit,
                          self.offset)
         return ps.posts()
