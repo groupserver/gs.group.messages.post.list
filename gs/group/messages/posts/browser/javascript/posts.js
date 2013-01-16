@@ -6,11 +6,11 @@ jQuery(document).ready( function () {
                            'gs-group-messages-posts-ajax.html', 
                            0, 12, {}, null);
     show_posts = function(event, ui) {
-        var panel = jQuery(ui.panel);
-        if ((panel.attr('id') ===  'task-tab-1') && 
+        // Tab counting starts at 0. Posts are the second tab.
+        if ((ui.newPanel.attr('id') ===  'gs-group-messages-base-tabs-1') && 
             (!postsSearch.results_shown())) {
             postsSearch.load();
         }
     };
-    jQuery('#task-tabs').bind('tabsshow', show_posts);
+    jQuery('#gs-group-messages-base-tabs').on('tabsactivate', show_posts);
 });

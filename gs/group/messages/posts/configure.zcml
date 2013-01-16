@@ -4,7 +4,8 @@
   xmlns:five="http://namespaces.zope.org/five">
 
   <!--The Posts tab on the group page-->
-  <browser:viewlet name="gs-group-messages-posts-tab"
+  <browser:viewlet 
+    name="gs-group-messages-posts-tab"
     manager="gs.group.messages.base.interfaces.IGroupHomepageMessages"
     template="browser/templates/poststab.pt"
     class=".poststab.PostsTab"
@@ -12,7 +13,8 @@
     weight="20"
     title="Posts" />
   <!--The JavaScript to drive the Posts tab-->
-  <browser:viewlet name="gs-group-messages-posts-script"
+  <browser:viewlet 
+    name="gs-group-messages-posts-script"
     manager="gs.group.home.interfaces.IGroupHomepageScripts"
     template="browser/templates/postsscript.pt"
     class="gs.group.home.simpletab.PublicTab"
@@ -20,7 +22,7 @@
     weight="20"
     title="Posts Script" />
   <browser:resource 
-    name="gs-group-messages-posts-js-20120601.js"
+    name="gs-group-messages-posts-js-20130116.js"
     file="browser/javascript/posts.js"
     permission="zope2.Public" />
   <!--The page that returns the posts to the tab. -->
