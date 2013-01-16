@@ -5,7 +5,7 @@
 
   <!--The Posts tab on the group page-->
   <browser:viewlet name="gs-group-messages-posts-tab"
-    manager="gs.group.home.interfaces.IGroupHomepageTasks"
+    manager="gs.group.messages.base.interfaces.IGroupHomepageMessages"
     template="browser/templates/poststab.pt"
     class=".poststab.PostsTab"
     permission="zope2.Public"
