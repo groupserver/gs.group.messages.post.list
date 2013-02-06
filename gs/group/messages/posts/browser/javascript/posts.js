@@ -14,11 +14,9 @@ jQuery(document).ready( function () {
     postsSearch = GSSearch('#gs-group-messages-posts-search', 
                            url, 0, 12, {}, null);
     show_posts = function(event, ui) {
-        // Tab counting starts at 0. Posts are the second tab.
-        if ((ui.newPanel.attr('id') ===  'gs-group-messages-base-tabs-1') && 
-            (!postsSearch.results_shown())) {
+        if (!postsSearch.results_shown()) {
             postsSearch.load();
         }
     };
-    jQuery('#gs-group-messages-base-tabs').on('tabsactivate', show_posts);
+    jQuery('a[href="#gs-group-messages-base-tabs-1"]').on('shown', show_posts);
 });
