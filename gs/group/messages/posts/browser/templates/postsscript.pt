@@ -1,4 +1,5 @@
-<script id="gs-group-messages-posts-script"
+<script async="true" defer="true"
+        id="gs-group-messages-posts-script"
         src="/++resource++gs-group-messages-posts-js-20130116.js"
         type="text/javascript">
   &#160;
