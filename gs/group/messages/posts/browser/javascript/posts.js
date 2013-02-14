@@ -24,6 +24,6 @@ var init_post_search = function () {
 
 
 jQuery(window).load(function () {
-    gsJsLoader.with('/++resource++gs-search-base-js-20121217.js',
-                    init_post_search);
+    gsJsLoader.with_module('/++resource++gs-search-base-js-20121217.js',
+                           init_post_search);
 });
