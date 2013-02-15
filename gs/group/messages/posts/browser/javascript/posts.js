@@ -1,10 +1,7 @@
 jQuery.noConflict();
 
-var init_post_search = function () {
-    var postsSearch = null;
-    var show_posts = null;
-    var b = null;
-    var url = null;
+function init_post_search() {
+    var postsSearch = null, show_posts = null, b = null, url = null;
 
     b = jQuery('base').attr('href');
     if (b[b.length -1] != '/') {
