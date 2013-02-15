@@ -1,13 +1,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
   xmlns:metal="http://xml.zope.org/namespaces/metal"
   xmlns:tal="http://xml.zope.org/namespaces/tal"
-  metal:use-macro="context/@@groupserver_site_home_layout/page">
+  metal:use-macro="context/@@groupserver_layout/page">
   <head>
-  	<title metal:fill-slot="title">
-      Posts in
-      <span tal:replace="view/groupInfo/name"/>:
-      <span tal:replace="view/siteInfo/name"/>
-    </title>
+        <title metal:fill-slot="title">
+          Posts in <span tal:replace="view/groupInfo/name"/>:
+          <span tal:replace="view/siteInfo/name"/>
+        </title>
     
     <tal:block metal:fill-slot="metadata" 
       tal:define="global postURLPrefix string:p/;
@@ -29,7 +28,7 @@
         tal:attributes="href lastChunkURL" />
       <link rel="up" href="#"
         tal:attributes="title view/groupInfo/name;
-        href view/groupInfo/relativeURL" />
+        href string:${view/groupInfo/relativeURL}/" />
       <link rel="alternate" title="ATOM Feed" type="application/atom+xml"
         href="#" 
         tal:attributes="title string:Posts in ${view/groupInfo/name};
@@ -38,77 +37,72 @@
   </head>
   
   <body>
-    <div class="hatom" metal:fill-slot="body"
+    <ul metal:fill-slot="breadcrumb">
+      <li><a tal:attributes="title string:${view/siteInfo/name} Homepage"
+             href="/" title="Home">&#8962;</a></li>
+      <li>
+        <a tal:attributes="href string:${view/groupInfo/relativeURL}/">
+          <strong class="group" 
+                  tal:content="view/groupInfo/name">This group</strong>
+        </a>
+      </li>
+      <li>Posts</li>
+    </ul>
+    <div metal:fill-slot="body" role="main" id="gs-group-messages-posts-page"
          tal:define="postList view/posts;
                      post_count python:len(postList)">
+      <div class="btn-group nav" role="navigation" 
+           tal:define="len view/chunkLength">
+        <a href="#" tal:condition="laterURL" class="prev btn"
+           tal:attributes="href laterURL;
+                           title string:The ${len} more recent posts;">Prev</a>
+        <span tal:condition="not:laterURL" class="prev btn disabled">Prev</span>
+        <a class="group up btn"
+           tal:attributes="title string:Group: ${view/groupInfo/name};
+                           href string:${view/groupInfo/relativeURL}/;"
+           href="#">Up</a>
+        <a href="#" tal:condition="earlierURL" class="next btn"
+           tal:attributes="href earlierURL;
+                           title string:The ${len} older posts;">Next</a>
+        <span tal:condition="not:earlierURL" 
+              class="next btn disabled">Earlier</span>
+      </div>
       <h1>Posts in
-        <span class="group"
-          tal:content="view/groupInfo/name"/></h1>
-      <tal:block tal:define="len view/chunkLength">
-        <ul class="inline-list navlinks">
-          <li>
-            <a href="#" tal:condition="laterURL" class="prev"
-              tal:attributes="href laterURL;
-              title string:The ${len} more recent posts;">Later 
-              <span tal:replace="len">-1</span> posts</a>
-            <span tal:condition="not:laterURL" class="prev">Later
-              <span tal:replace="len">-1</span> posts
-            </span>
-          </li>
-          <li>
-            <a class="group up"
-              tal:attributes="title string:${view/groupInfo/name};
-                  href view/groupInfo/relativeURL;"
-              href="#">Group</a></li>
-          <li>
-          <li>
-            <a href="#" tal:condition="earlierURL" class="next"
-              tal:attributes="href earlierURL;
-              title string:The ${len} older posts;">Earlier
-              <span tal:replace="len">-1</span> posts</a>
-            <span tal:condition="not:earlierURL" class="next">Earlier
-              <span tal:replace="len">-1</span> posts
-            </span>
-          </li>
-        </ul>
-      </tal:block>
-      <div class="postList" 
+      <span class="group"
+            tal:content="view/groupInfo/name"/></h1>
+      <div class="postList hatom"
         tal:condition="python:post_count > 0">
         <tal:block repeat="post postList">
           <p tal:define="position repeat/post/number; 
             topicName post/subject;
-            isPublic view/isPublic"
+            isPublic view/isPublic;
+            rptAuth python:postList[position-1]['author_id'] == postList[position-2]['author_id'];
+      showPhoto python:(position==1) or not(rptAuth);"
             tal:replace="structure provider:groupserver.Post">
             The email message is rendered by the Post content provider,
             not by this page.
           </p>
         </tal:block>
       </div><!--postList-->
-      <p tal:condition="python:not(post_count > 0)">
+      <div class="btn-group nav" role="navigation" 
+           tal:define="len view/chunkLength">
+        <a href="#" tal:condition="laterURL" class="prev btn"
+           tal:attributes="href laterURL;
+                           title string:The ${len} more recent posts;">Prev</a>
+        <span tal:condition="not:laterURL" class="prev btn disabled">Prev</span>
+        <a class="group up btn"
+           tal:attributes="title string:Group: ${view/groupInfo/name};
+                           href string:${view/groupInfo/relativeURL}/;"
+           href="#">Up</a>
+        <a href="#" tal:condition="earlierURL" class="next btn"
+           tal:attributes="href earlierURL;
+                           title string:The ${len} older posts;">Next</a>
+        <span tal:condition="not:earlierURL" 
+              class="next btn disabled">Earlier</span>
+      </div><!--navigation-->
+      <p tal:condition="python:post_count == 0">
         There are no posts in this group.
       </p>
-      <tal:block tal:define="len view/chunkLength">
-        <ul class="inline-list navlinks">
-          <li>
-            <a href="#" tal:condition="laterURL" class="prev"
-              tal:attributes="href laterURL;
-              title string:The ${len} more recent posts;">Later 
-              <span tal:replace="len">-1</span> posts</a>
-            <span tal:condition="not:laterURL" class="prev">Later
-              <span tal:replace="len">-1</span> posts
-            </span>
-          </li>
-          <li>
-            <a href="#" tal:condition="earlierURL" class="next"
-              tal:attributes="href earlierURL;
-              title string:The ${len} older posts;">Earlier
-              <span tal:replace="len">-1</span> posts</a>
-            <span tal:condition="not:earlierURL" class="next">Earlier
-              <span tal:replace="len">-1</span> posts
-            </span>
-          </li>
-        </ul>
-      </tal:block>
     </div><!--hatom-->
     <tal:block metal:fill-slot="javascript">
         <script type="text/javascript"
@@ -116,4 +110,3 @@
     </tal:block>
   </body>
 </html>
-
