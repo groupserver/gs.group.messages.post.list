@@ -13,7 +13,7 @@ class PostsView(GroupPage):
     topNPosts = 64
 
     def __init__(self, context, request):
-        GroupPage.__init__(self, context, request)
+        super(PostsView, self).__init__(context, request)
 
         self.start = int(self.request.form.get('start', 0))
         self.end = int(self.request.form.get('end', 20))
