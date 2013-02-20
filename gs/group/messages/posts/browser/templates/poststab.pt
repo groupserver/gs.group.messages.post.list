@@ -1,5 +1,4 @@
-<div id="gs-group-messages-posts" 
-     tal:condition="view/viewTopics">
+<div id="gs-group-messages-posts" role="application">
   <div class="gs-search search" id="gs-group-messages-posts-search">
     <div class="gs-search-entry input-append">
       <input type="search" class="textEntry" value=""
