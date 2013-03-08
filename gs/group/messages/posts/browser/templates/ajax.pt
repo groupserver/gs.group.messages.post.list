@@ -24,7 +24,7 @@
           </td>
           <td class="topic">
             <a tal:condition="post/subject"
-              tal:attributes="href string:/r/post/${post/post_id}"
+              tal:attributes="href string:${view/groupInfo/relativeURL}/messages/post/${post/post_id}"
               tal:content="python:post['subject'][:50]">A Topic</a>
           </td>
           <td class="files">
