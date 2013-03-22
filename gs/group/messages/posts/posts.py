@@ -2,7 +2,7 @@
 from zope.cachedescriptors.property import Lazy
 from Products.XWFMailingListManager.queries import MessageQuery
 from Products.GSGroup.utils import is_public
-from gs.group.base.page import GroupPage
+from gs.group.base import GroupPage
 
 
 import logging

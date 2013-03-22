@@ -2,7 +2,7 @@
 from zope.cachedescriptors.property import Lazy
 from zope.component import createObject
 from AccessControl import getSecurityManager
-from gs.group.base.page import GroupPage
+from gs.group.base import GroupPage
 from postssearch import PostsSearch
 
 

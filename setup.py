@@ -32,15 +32,19 @@ setup(name='gs.group.messages.posts',
     zip_safe=True,
     install_requires=[
         'setuptools',
-        'gs.content.js.jquery',
+        'sqlalchemy',
+        'zope.cachedescriptors',
+        'zope.component',
+        'AccessControl',
+        'gs.database',
         'gs.group.base',
         'gs.group.home',
         'gs.group.messages.base',
+        'gs.group.member.canpost',
         'Products.GSGroup',
-        'Products.GSSearch',
-        # -*- Extra requirements: -*-
+        'Products.XWFCore',
+        'Products.XWFMailingListManager',
     ],
     entry_points="""
     # -*- Entry points: -*-
     """,)
-
