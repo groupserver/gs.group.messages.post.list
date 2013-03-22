@@ -9,7 +9,7 @@ function gs_group_messages_posts_init_search() {
         }
     }
     function get_url() {
-        var b = null, 
+        var b = null;
         b = jQuery('base').attr('href');
         if (b[b.length -1] != '/') {
             b = b + '/';
