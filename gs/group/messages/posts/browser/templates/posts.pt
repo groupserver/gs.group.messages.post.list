@@ -105,7 +105,7 @@
       </p>
     </div><!--hatom-->
     <script metal:fill-slot="javascript" type="text/javascript" 
-            src="/++resource++gs-group-messages-post-share-20130114.js"
+            src="/++resource++gs-group-messages-post-share-min-20130114.js"
             defer="true">&#160;</script>
   </body>
 </html>
