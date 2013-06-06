@@ -27,10 +27,13 @@
           <a href="messages/posts.html">All posts</a>
         </li>
         <li>
-          <a type="application/atom+xml" class="alternateATOM"
+          <a type="application/atom+xml" class="icon-alone"
              tal:define="title string:Posts in ${view/groupInfo/name};
                          url string:/s/search.atom?t=0&amp;f=0&amp;p=1&amp;g=${view/groupInfo/id}"
-             tal:attributes="href url" href="#">&#160;</a>
+             tal:attributes="href url" href="#">
+            <span data-icon="&#xe003;" aria-hidden="true"> </span>
+            <span class="screen-reader-text">Web feed</span>
+          </a>
         </li>
       </ul>
       <button id="gs-group-messages-posts-toolbar-next"
