@@ -9,14 +9,20 @@
     </div><!--gs-search-entry-->
     <p id="gs-group-messages-posts-loading" role="status"
       class="gs-search-loading" style="display:none;">
-      <img src="/++resource++anim/wait.gif" aria-visible="false"/> 
+      <img src="/++resource++anim/wait.gif" aria-visible="false"/>
       Loading the posts
     </p><!--gs-group-messages-posts-loading-->
     <div id="gs-group-messages-posts-latest" aria-live="polite"
          class="gs-search-results">
       &#160;
     </div><!--gs-group-messages-posts-latest-->
-    <div id="gs-group-messages-posts-toolbar" 
+    <p class="gs-search-failed">
+      No posts were found.
+    </p><!--gs-search-failed-->
+    <p class="gs-search-empty muted">
+      There are no posts in this group.
+    </p><!--gs-search-empty-->
+    <div id="gs-group-messages-posts-toolbar"
          class="toolbar gs-search-toolbar btn-toolbar">
       <button id="gs-group-messages-posts-toolbar-prev"
               aria-flowto="gs-group-messages-posts-toolbar-next"
