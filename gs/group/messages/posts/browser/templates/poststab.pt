@@ -9,8 +9,8 @@
     </div><!--gs-search-entry-->
     <p id="gs-group-messages-posts-loading" role="status"
       class="gs-search-loading" style="display:none;">
-      <img src="/++resource++anim/wait.gif" aria-visible="false"/>
-      Loading the posts
+      <span data-icon="&#xe619;" aria-hidden="true" class="loading"> </span>
+      Loading the posts&#8230;
     </p><!--gs-group-messages-posts-loading-->
     <div id="gs-group-messages-posts-latest" aria-live="polite"
          class="gs-search-results">
