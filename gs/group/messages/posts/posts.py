@@ -1,12 +1,25 @@
-# coding=utf-8
+# -*- coding: utf-8 -*-
+##############################################################################
+#
+# Copyright © 2013, 2014 OnlineGroups.net and Contributors.
+# All Rights Reserved.
+#
+# This software is subject to the provisions of the Zope Public License,
+# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+##############################################################################
+from __future__ import absolute_import, unicode_literals
+from logging import getLogger
+log = getLogger('gs.group.messages.posts.postsview.PostsView')
 from zope.cachedescriptors.property import Lazy
+from gs.core import to_ascii
 from Products.XWFMailingListManager.queries import MessageQuery
 from Products.GSGroup.utils import is_public
 from gs.group.base import GroupPage
-
-
-import logging
-log = logging.getLogger('gs.group.messages.posts.postsview.PostsView')
 
 
 class PostsView(GroupPage):
@@ -24,8 +37,8 @@ class PostsView(GroupPage):
             self.start = tmp
         nPosts = (self.end - self.start)
         if (nPosts > self.topNPosts):
-            m = u'Request for %d posts (%d--%d) from %s (%s) on ' \
-                u'%s (%s) is too high; returning %d.' % \
+            m = 'Request for %d posts (%d--%d) from %s (%s) on ' \
+                '%s (%s) is too high; returning %d.' % \
                 (nPosts, self.start, self.end, self.groupInfo.name,
                 self.groupInfo.id, self.siteInfo.name,
                 self.siteInfo.id, self.topNPosts)
@@ -84,11 +97,12 @@ class PostsView(GroupPage):
         newEnd = newStart + self.chunkLength
 
         if newStart != self.start and newStart:
-            retval = 'posts.html?start=%d&end=%d' % (newStart, newEnd)
+            url = 'posts.html?start=%d&end=%d' % (newStart, newEnd)
         elif newStart != self.start and not newStart:
-            retval = 'posts.html'
+            url = 'posts.html'
         else:
-            retval = ''
+            url = ''
+        retval = to_ascii(url)
         return retval
 
     def get_earlier_url(self):
@@ -97,30 +111,31 @@ class PostsView(GroupPage):
         newStart = self.end
         newEnd = newStart + self.chunkLength
         if newStart < self.numPosts:
-            retval = 'posts.html?start=%d&end=%d' % (newStart, newEnd)
+            url = 'posts.html?start=%d&end=%d' % (newStart, newEnd)
         else:
-            retval = ''
+            url = ''
+        retval = to_ascii(url)
         return retval
 
     def get_last_url(self):
         newStart = self.numPosts - self.chunkLength
         newEnd = self.numPosts
-        return 'posts.html?start=%d&end=%d' % (newStart, newEnd)
+        url = 'posts.html?start=%d&end=%d' % (newStart, newEnd)
+        retval = to_ascii(url)
+        return retval
 
     def get_most_recent_post_date(self):
         retval = ''
-
         if self.posts:
             mostRecentPost = self.posts[0]
             d = mostRecentPost['date']
             date = d - d.utcoffset()
             retval = date.strftime('%Y-%m-%dT%H:%M:%SZ')
-
         return retval
 
     @Lazy
     def web_feed_uri(self):
-        retval = '/s/search.atom?g=%s&p=1&t=0&l=%d' %\
-          (self.groupInfo.id, self.chunkLength)
-        assert type(retval) == str
+        uri = '/s/search.atom?g=%s&p=1&t=0&l=%d' % \
+                (self.groupInfo.id, self.chunkLength)
+        retval = to_ascii(uri)
         return retval

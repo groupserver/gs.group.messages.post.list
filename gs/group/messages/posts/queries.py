@@ -1,8 +1,21 @@
-# -*- coding: utf-8 *-*
-u'''The queries for searching all posts in a group.'''
+# -*- coding: utf-8 -*-
+##############################################################################
+#
+# Copyright © 2013, 2014 OnlineGroups.net and Contributors.
+# All Rights Reserved.
+#
+# This software is subject to the provisions of the Zope Public License,
+# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+##############################################################################
+from __future__ import absolute_import, unicode_literals
 import sqlalchemy as sa
+from gs.core import to_unicode_or_bust
 from gs.database import getTable, getSession
-from utils import to_unicode
 
 
 class PostSearchQuery(object):
@@ -31,7 +44,7 @@ class PostSearchQuery(object):
         return statement
 
     def files_metadata(self, post_id):
-        u""" Retrieve the metadata of all files associated with this post.
+        """ Retrieve the metadata of all files associated with this post.
 
             Returns:
                 [{'file_id': ID, 'mime_type': String,
@@ -47,9 +60,9 @@ class PostSearchQuery(object):
         retval = []
         if r.rowcount:
             retval = [{'file_id': row['file_id'],
-                       'file_name': to_unicode(row['file_name']),
+                       'file_name': to_unicode_or_bust(row['file_name']),
                        'date': row['date'],
-                       'mime_type': to_unicode(row['mime_type']),
+                       'mime_type': to_unicode_or_bust(row['mime_type']),
                        'file_size': row['file_size']} for row in r]
         return retval
 
@@ -62,7 +75,7 @@ class PostSearchQuery(object):
             statement.append_whereclause(m)
 
     def search(self, searchTokens, site_id, group_ids, limit=12, offset=0):
-        u'''Search the posts for the tokens in "searchTokens".'''
+        '''Search the posts for the tokens in "searchTokens".'''
         pt = self.postTable
         cols = [pt.c.post_id, pt.c.user_id, pt.c.group_id,
                   pt.c.subject, pt.c.date, pt.c.body, pt.c.has_attachments]
