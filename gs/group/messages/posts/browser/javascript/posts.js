@@ -1,6 +1,7 @@
-// GroupServer JavaScript module for providing the Search mechanism
+"use strict";
+// GroupServer JavaScript module for providing the content of the Posts tab
 //
-// Copyright © 2013 OnlineGroups.net and Contributors.
+// Copyright © 2013, 2014 OnlineGroups.net and Contributors.
 // All Rights Reserved.
 //
 // This software is subject to the provisions of the Zope Public License,
@@ -9,20 +10,22 @@
 jQuery.noConflict();
 
 function gs_group_messages_posts_init_search() {
-    var postsSearch = null;
+    var postsSearch=null;
 
     function posts_show (event, ui) {
         if (!postsSearch.results_shown()) {
             postsSearch.load();
         }
     }
+
     function get_url() {
-        var b = null;
+        var b=null, retval=null;
         b = jQuery('base').attr('href');
         if (b[b.length -1] != '/') {
             b = b + '/';
         }
-        return b + 'gs-group-messages-posts-ajax.html';
+        retval = b + 'gs-group-messages-posts-ajax.html';
+        return retval;
     }
     
     postsSearch = GSSearch('#gs-group-messages-posts-search', 
@@ -32,6 +35,6 @@ function gs_group_messages_posts_init_search() {
 
 
 jQuery(window).load(function () {
-    gsJsLoader.with_module('/++resource++gs-search-base-js-min-20131121.js',
+    gsJsLoader.with_module('/++resource++gs-search-base-js-min-20140313.js',
                            gs_group_messages_posts_init_search);
 });
