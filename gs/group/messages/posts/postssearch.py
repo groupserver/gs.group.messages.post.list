@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+############################################################################
 #
 # Copyright © 2013, 2014 OnlineGroups.net and Contributors.
 # All Rights Reserved.
@@ -11,7 +11,7 @@
 # WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
 # FOR A PARTICULAR PURPOSE.
 #
-##############################################################################
+############################################################################
 from __future__ import absolute_import, unicode_literals
 from zope.cachedescriptors.property import Lazy
 from zope.component import createObject
@@ -59,8 +59,9 @@ class PostsSearch(object):
 
     @Lazy
     def rawPostInfo(self):
-        retval = self.postSearchQuery.search(self.searchTokens,
-              self.siteInfo.id, [self.groupInfo.id], self.limit, self.offset)
+        retval = self.postSearchQuery.search(
+            self.searchTokens, self.siteInfo.id, [self.groupInfo.id],
+            self.limit, self.offset)
         assert type(retval) == list
         return retval
 
@@ -69,12 +70,12 @@ class PostsSearch(object):
         authorInfo = self.authorCache.get(uid)
         if not authorInfo:
             authorInfo = createObject('groupserver.UserFromId',
-                                        self.context, uid)
+                                      self.context, uid)
             authorInfo = {
-              'id': authorInfo.id,
-              'exists': not authorInfo.anonymous,
-              'url': to_ascii(authorInfo.url),
-              'name': authorInfo.name,
+                'id': authorInfo.id,
+                'exists': not authorInfo.anonymous,
+                'url': to_ascii(authorInfo.url),
+                'name': authorInfo.name,
             }
             self.authorCache.add(uid, authorInfo)
         assert type(authorInfo) == dict

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+############################################################################
 #
 # Copyright © 2013, 2014 OnlineGroups.net and Contributors.
 # All Rights Reserved.
@@ -11,7 +11,7 @@
 # WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
 # FOR A PARTICULAR PURPOSE.
 #
-##############################################################################
+############################################################################
 from __future__ import absolute_import, unicode_literals
 from logging import getLogger
 log = getLogger('gs.group.messages.posts.postsview.PostsView')
@@ -40,8 +40,8 @@ class PostsView(GroupPage):
             m = 'Request for %d posts (%d--%d) from %s (%s) on ' \
                 '%s (%s) is too high; returning %d.' % \
                 (nPosts, self.start, self.end, self.groupInfo.name,
-                self.groupInfo.id, self.siteInfo.name,
-                self.siteInfo.id, self.topNPosts)
+                 self.groupInfo.id, self.siteInfo.name,
+                 self.siteInfo.id, self.topNPosts)
             log.warn(m)
             self.end = self.start + self.topNPosts
 
@@ -72,8 +72,8 @@ class PostsView(GroupPage):
     def posts(self):
         limit = self.chunkLength
         retval = self.messageQuery.latest_posts(self.siteInfo.get_id(),
-                                              self.lists, limit=limit,
-                                              offset=self.start)
+                                                self.lists, limit=limit,
+                                                offset=self.start)
 
         return retval
 
@@ -136,6 +136,6 @@ class PostsView(GroupPage):
     @Lazy
     def web_feed_uri(self):
         uri = '/s/search.atom?g=%s&p=1&t=0&l=%d' % \
-                (self.groupInfo.id, self.chunkLength)
+            (self.groupInfo.id, self.chunkLength)
         retval = to_ascii(uri)
         return retval

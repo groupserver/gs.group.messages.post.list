@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+############################################################################
 #
 # Copyright © 2013, 2014 OnlineGroups.net and Contributors.
 # All Rights Reserved.
@@ -11,7 +11,7 @@
 # WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
 # FOR A PARTICULAR PURPOSE.
 #
-##############################################################################
+############################################################################
 from __future__ import absolute_import, unicode_literals
 import sqlalchemy as sa
 from gs.core import to_unicode_or_bust
@@ -25,7 +25,7 @@ class PostSearchQuery(object):
         self.fileTable = getTable('file')
 
     def add_standard_where_clauses(self, statement, site_id, group_ids,
-                                    hidden):
+                                   hidden):
         statement.append_whereclause(self.postTable.c.site_id == site_id)
         if group_ids:
             inStatement = self.postTable.c.group_id.in_(group_ids)
@@ -67,9 +67,11 @@ class PostSearchQuery(object):
         return retval
 
     def add_search_where_clauses(self, statement, searchTokens):
+        # TODO Look at <https://sqlalchemy-searchable.readthedocs.org/>
         if searchTokens.keywords:  # --=mpj17=-- Change to phrases
-            # --=mpj17=-- Note that the following call to the "match()" method
-            #    is one of the reasons that GroupServer *requires* PostgreSQL.
+            # --=mpj17=-- Note that the following call to the "match()"
+            # method is one of the reasons that GroupServer *requires*
+            # PostgreSQL.
             q = '&'.join(searchTokens.keywords)
             m = self.postTable.c.fts_vectors.match(q)
             statement.append_whereclause(m)
@@ -78,11 +80,12 @@ class PostSearchQuery(object):
         '''Search the posts for the tokens in "searchTokens".'''
         pt = self.postTable
         cols = [pt.c.post_id, pt.c.user_id, pt.c.group_id,
-                  pt.c.subject, pt.c.date, pt.c.body, pt.c.has_attachments]
+                pt.c.subject, pt.c.date, pt.c.body, pt.c.has_attachments]
         statement = sa.select(cols, limit=limit, offset=offset,
-                  order_by=sa.desc(pt.c.date))
+                              order_by=sa.desc(pt.c.date))
 
-        self.add_standard_where_clauses(statement, site_id, group_ids, False)
+        self.add_standard_where_clauses(statement, site_id, group_ids,
+                                        False)
         self.add_search_where_clauses(statement, searchTokens)
 
         session = getSession()
@@ -90,15 +93,15 @@ class PostSearchQuery(object):
         retval = []
         for x in r:
             p = {
-              'post_id': x['post_id'],
-              'user_id': x['user_id'],
-              'group_id': x['group_id'],
-              'subject': x['subject'],
-              'date': x['date'],
-              'body': x['body'],
-              'files_metadata': x['has_attachments']
-                                  and self.files_metadata(x['post_id'])
-                                  or [],
-              }
+                'post_id': x['post_id'],
+                'user_id': x['user_id'],
+                'group_id': x['group_id'],
+                'subject': x['subject'],
+                'date': x['date'],
+                'body': x['body'],
+                'files_metadata':
+                self.files_metadata(x['post_id'])
+                if x['has_attachments'] else [],
+            }
             retval.append(p)
         return retval
