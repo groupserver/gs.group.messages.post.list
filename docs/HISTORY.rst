@@ -7,6 +7,9 @@ Changelog
 * Adding internationalisation support
 * Pointing the product at Transifex_
 
+.. _Transifex:
+   https://www.transifex.com/projects/p/gs-group-messages-posts/
+
 4.2.3 (2014-10-10)
 ------------------
 
