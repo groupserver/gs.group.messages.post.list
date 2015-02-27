@@ -56,8 +56,10 @@ the topic-title appears at the start of the post metadata.
 Resources
 =========
 
-- Code repository: https://github.com/groupserver/gs.group.messages.posts
-- Questions and comments to http://groupserver.org/groups/development
+- Code repository:
+  https://github.com/groupserver/gs.group.messages.posts/
+- Questions and comments to
+  http://groupserver.org/groups/development
 - Report bugs at https://redmine.iopen.net/projects/groupserver
 
 .. _GroupServer: http://groupserver.org/

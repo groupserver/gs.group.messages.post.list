@@ -1,11 +1,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="gs.group.messages.posts"
       metal:use-macro="context/@@groupserver_layout/page">
   <head>
-    <title metal:fill-slot="title">
-      Posts in <span tal:replace="view/groupInfo/name"/>:
-      <span tal:replace="view/siteInfo/name"/>
+    <title metal:fill-slot="title" i18n:translate="posts-page-title">
+      Posts in
+      <tal:block i18n:name="groupName" replace="view/groupInfo/name"/>:
+      <tal:block i18n:name="siteName" replace="view/siteInfo/name"/>
     </title>
 
     <tal:block metal:fill-slot="metadata"
@@ -38,15 +41,21 @@
 
   <body>
     <ul metal:fill-slot="breadcrumb">
-      <li><a tal:attributes="title string:${view/siteInfo/name} Homepage"
-             href="/" title="Home">&#8962;</a></li>
+      <li>
+        <a tal:attributes="title string:${view/siteInfo/name} Homepage"
+             href="/" title="Home" class="icon-alone">
+          <span aria-hidden="true" data-icon="&#x2302;"></span>
+          <span class="screen-reader-text"
+                i18n:translate="site-home-link">Site home page</span>
+        </a>
+      </li>
       <li>
         <a tal:attributes="href string:${view/groupInfo/relativeURL}/">
           <strong class="group"
                   tal:content="view/groupInfo/name">This group</strong>
         </a>
       </li>
-      <li>Posts</li>
+      <li i18n:translate="posts">Posts</li>
     </ul>
     <div metal:fill-slot="body" role="main" id="gs-group-messages-posts-page"
          tal:define="postList view/posts;
@@ -55,21 +64,28 @@
            tal:define="len view/chunkLength">
         <a href="#" tal:condition="laterURL" class="prev btn"
            tal:attributes="href laterURL;
-                           title string:The ${len} more recent posts;">Prev</a>
-        <span tal:condition="not:laterURL" class="prev btn disabled">Prev</span>
+                           title string:The ${len} more recent posts;"
+           i18n:translate="newer-button">Newer</a>
+        <span tal:condition="not:laterURL"
+              i18n:translate="newer-button"
+              class="prev btn disabled">Newer</span>
         <a class="group up btn"
-           tal:attributes="title string:Group: ${view/groupInfo/name};
+           tal:attributes="title view/groupInfo/name;
                            href string:${view/groupInfo/relativeURL}/;"
-           href="#">Up</a>
+           href="#" i18n:translate="group-button">Group</a>
         <a href="#" tal:condition="earlierURL" class="next btn"
            tal:attributes="href earlierURL;
-                           title string:The ${len} older posts;">Next</a>
+                           title string:The ${len} older posts;"
+           i18n:translate="older-button">Older</a>
         <span tal:condition="not:earlierURL"
-              class="next btn disabled">Earlier</span>
+              i18n:translate="older-button"
+              class="next btn disabled">Older</span>
       </div>
-      <h1>Posts in
-      <span class="group"
-            tal:content="view/groupInfo/name"/></h1>
+      <h1 i18n:translate="post-page-heading">
+        Posts in
+        <span class="group" i18n:name="groupName"
+              tal:content="view/groupInfo/name">This group</span>
+      </h1>
       <div class="postList hatom"
            tal:condition="python:post_count > 0">
         <tal:block repeat="post postList">
@@ -88,19 +104,24 @@
            tal:define="len view/chunkLength">
         <a href="#" tal:condition="laterURL" class="prev btn"
            tal:attributes="href laterURL;
-                           title string:The ${len} more recent posts;">Prev</a>
-        <span tal:condition="not:laterURL" class="prev btn disabled">Prev</span>
+                           title string:The ${len} more recent posts;"
+           i18n:translate="newer-button">Newer</a>
+        <span tal:condition="not:laterURL" class="prev btn disabled"
+              i18n:translate="newer-button">Newer</span>
         <a class="group up btn"
-           tal:attributes="title string:Group: ${view/groupInfo/name};
+           tal:attributes="title view/groupInfo/name;
                            href string:${view/groupInfo/relativeURL}/;"
-           href="#">Up</a>
+           href="#" i18n:translate="group-button">Group</a>
         <a href="#" tal:condition="earlierURL" class="next btn"
            tal:attributes="href earlierURL;
-                           title string:The ${len} older posts;">Next</a>
+                           title string:The ${len} older posts;"
+           i18n:translate="older-button">Older</a>
         <span tal:condition="not:earlierURL"
-              class="next btn disabled">Earlier</span>
+              class="next btn disabled"
+              i18n:translate="older-button">Older</span>
       </div><!--navigation-->
-      <p tal:condition="python:post_count == 0">
+      <p tal:condition="python:post_count == 0"
+         i18n:translate="no-posts">
         There are no posts in this group.
       </p>
     </div><!--hatom-->

@@ -1,36 +1,47 @@
-<div id="gs-group-messages-posts" role="application">
+<div xmlns:tal="http://xml.zope.org/namespaces/tal"
+     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+     i18n:domain="gs.group.messages.posts"
+     id="gs-group-messages-posts" role="application">
   <div class="gs-search search" id="gs-group-messages-posts-search">
     <div class="gs-search-entry input-append"
          role="search" aria-controls="gs-group-messages-posts-latest">
       <input type="search" class="textEntry" value=""
              placeholder="Search within posts&#8230;"
+             i18n:attributes="posts-tab-search-placeholder"
              autocomplete="on" />
-      <button class="btn">Search</button>
+      <button class="btn"
+              i18n:translate="search-button">Search</button>
     </div><!--gs-search-entry-->
     <p id="gs-group-messages-posts-loading" role="status"
-      class="gs-search-loading" style="display:none;">
-      <span data-icon="&#xe619;" aria-hidden="true" class="loading"> </span>
+      class="gs-search-loading" style="display:none;"
+      i18n:translate="posts-tab-loading">
+      <span i18n:name="loadingIcon"
+            data-icon="&#xe619;" aria-hidden="true" class="loading"> </span>
       Loading the posts&#8230;
     </p><!--gs-group-messages-posts-loading-->
     <div id="gs-group-messages-posts-latest" aria-live="polite"
          class="gs-search-results">
       &#160;
     </div><!--gs-group-messages-posts-latest-->
-    <p class="gs-search-failed">
+    <p class="gs-search-failed"
+       i18n:translate="posts-tab-search-no-posts-found">
       No posts were found.
     </p><!--gs-search-failed-->
-    <p class="gs-search-empty muted">
+    <p class="gs-search-empty muted"
+       i18n:translate="posts-tab-search-no-posts">
       There are no posts in this group.
     </p><!--gs-search-empty-->
     <div id="gs-group-messages-posts-toolbar"
          class="toolbar gs-search-toolbar btn-toolbar">
       <button id="gs-group-messages-posts-toolbar-prev"
               aria-flowto="gs-group-messages-posts-toolbar-next"
-              class="btn gs-search-toolbar-previous">Newer</button>
+              class="btn gs-search-toolbar-previous"
+              i18n:translate="newer-button">Newer</button>
       <div id="gs-group-messages-posts-toolbar-navigation" role="navigation">
         <ul class="dotted-inline-list">
           <li>
-            <a href="messages/posts.html">All posts</a>
+            <a href="messages/posts.html"
+               i18n:translate="all-posts-link">All posts</a>
           </li>
           <li>
             <a type="application/atom+xml" class="icon-alone"
@@ -38,14 +49,16 @@
                            url string:/s/search.atom?t=0&amp;f=0&amp;p=1&amp;g=${view/groupInfo/id}"
                tal:attributes="href url" href="#">
               <span data-icon="&#xe003;" aria-hidden="true"> </span>
-              <span class="screen-reader-text">Web feed</span>
+              <span class="screen-reader-text"
+                    i18n:translate="web-feed-link">Web feed</span>
             </a>
           </li>
         </ul>
       </div><!--gs-group-messages-posts-toolbar-navigation-->
       <button id="gs-group-messages-posts-toolbar-next"
               aria-flowto="gs-group-messages-posts-toolbar-navigation"
-              class="btn gs-search-toolbar-next">Older</button>
+              class="btn gs-search-toolbar-next"
+              i18n:translate="older-button">Older</button>
     </div><!--gs-group-messages-posts-toolbar-->
   </div><!--gs-search-->
 </div><!--gs-group-messages-posts-->

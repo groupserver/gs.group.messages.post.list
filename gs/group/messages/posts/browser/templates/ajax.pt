@@ -1,12 +1,17 @@
-<div id="gs-group-messages-posts-ajax-response"
-  tal:define="munge_date python:modules['Products.XWFCore.XWFUtils'].munge_date;">
+<div xmlns:tal="http://xml.zope.org/namespaces/tal"
+     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+     i18n:domain="gs.group.messages.posts"
+     id="gs-group-messages-posts-ajax-response"
+  tal:define="m python:modules['Products.XWFCore.XWFUtils'];
+              munge_date python:m.munge_date;
+              change_tz python:m.change_timezone;">
   <table id="gs-group-messages-posts-ajax-response">
     <thead>
       <tr>
-        <th class="author">Author</th>
-        <th class="topic">Topic</th>
-        <th class="files">Files</th>
-        <th class="date">Date</th>
+        <th class="author" i18n:translate="author">Author</th>
+        <th class="topic" i18n:translate="topic">Topic</th>
+        <th class="files" i18n:translate="files">Files</th>
+        <th class="date" i18n:translate="date">Date</th>
       </tr>
     </thead>
     <tbody>
@@ -36,14 +41,16 @@
                   class string:fileIcon ${icon}">&#160;</a>
             </tal:block>
           </td>
-          <td class="date" 
-            tal:define="ctx view/context; d post/date"
-            tal:content="python:munge_date(ctx, d)">
-            Today, Tomorrow, Timaru
+          <td class="date"
+              tal:define="ctx view/context; pd post/date;
+                          d python:change_tz(pd, 'UTC').replace(microsecond=0);">
+            <time tal:content="python:munge_date(ctx, pd)"
+                  tal:attributes="datetime d/isoformat">
+              Today, Tomorrow, Timaru
+            </time>
           </td>
         </tr>
       </tal:block>
     </tbody>
   </table>
 </div><!--gs-group-messages-posts-ajax-response-->
-

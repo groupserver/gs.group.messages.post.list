@@ -1,0 +1,109 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2015-02-27 23:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+#. Default: "All posts"
+#: ./browser/templates/poststab.pt:43
+msgid "all-posts-link"
+msgstr ""
+
+#. Default: "Author"
+#: ./browser/templates/ajax.pt:11
+msgid "author"
+msgstr ""
+
+#. Default: "Date"
+#: ./browser/templates/ajax.pt:14
+msgid "date"
+msgstr ""
+
+#. Default: "Files"
+#: ./browser/templates/ajax.pt:13
+msgid "files"
+msgstr ""
+
+#. Default: "Group"
+#: ./browser/templates/posts.pt:72
+msgid "group-button"
+msgstr ""
+
+#. Default: "Newer"
+#: ./browser/templates/posts.pt:65
+#: ./browser/templates/poststab.pt:36
+msgid "newer-button"
+msgstr ""
+
+#. Default: "There are no posts in this group."
+#: ./browser/templates/posts.pt:123
+msgid "no-posts"
+msgstr ""
+
+#. Default: "Older"
+#: ./browser/templates/posts.pt:76
+#: ./browser/templates/poststab.pt:58
+msgid "older-button"
+msgstr ""
+
+#. Default: "Posts in ${groupName}"
+#: ./browser/templates/posts.pt:86
+msgid "post-page-heading"
+msgstr ""
+
+#. Default: "Posts"
+#: ./browser/templates/posts.pt:58
+#: ./poststab.py:26
+msgid "posts"
+msgstr ""
+
+#. Default: "Posts in ${groupName}: ${siteName}"
+#: ./browser/templates/posts.pt:11
+msgid "posts-page-title"
+msgstr ""
+
+#. Default: "${loadingIcon} Loading the posts…"
+#: ./browser/templates/poststab.pt:18
+msgid "posts-tab-loading"
+msgstr ""
+
+#. Default: "There are no posts in this group."
+#: ./browser/templates/poststab.pt:30
+msgid "posts-tab-search-no-posts"
+msgstr ""
+
+#. Default: "No posts were found."
+#: ./browser/templates/poststab.pt:26
+msgid "posts-tab-search-no-posts-found"
+msgstr ""
+
+#. Default: "Search"
+#: ./browser/templates/poststab.pt:12
+msgid "search-button"
+msgstr ""
+
+#. Default: "Site home page"
+#: ./browser/templates/posts.pt:48
+msgid "site-home-link"
+msgstr ""
+
+#. Default: "Topic"
+#: ./browser/templates/ajax.pt:12
+msgid "topic"
+msgstr ""
+
+#. Default: "Web feed"
+#: ./browser/templates/poststab.pt:52
+msgid "web-feed-link"
+msgstr ""
+

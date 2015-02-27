@@ -1,11 +1,20 @@
 Changelog
 =========
 
+4.2.4 (2015-02-27)
+------------------
+
+* Adding internationalisation support
+* Pointing the product at Transifex_
+
 4.2.3 (2014-10-10)
 ------------------
 
-* Switching to GitHub as the primary code repository, and naming
+* Switching to GitHub_ as the primary code repository, and naming
   the reStructuredText files as such
+
+.. _GitHub:
+   https://github.com/groupserver/gs.group.messages.posts/
 
 4.2.2 (2014-06-24)
 ------------------
@@ -68,3 +77,5 @@ Changelog
 
 * Initial version (was part of ``gs.group.messages.post``,
   singular)
+
+..  LocalWords:  Changelog Transifex GitHub reStructuredText
