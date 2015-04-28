@@ -1,6 +1,13 @@
 Changelog
 =========
 
+4.2.6 (2015-04-28)
+------------------
+
+* Removing ``role="application"``, closing  `Bug 4156`_
+
+.. _Bug 4156: https://redmine.iopen.net/issues/4156
+
 4.2.5 (2015-03-11)
 ------------------
 
