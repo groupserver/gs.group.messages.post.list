@@ -1,12 +1,14 @@
 # 
 # Translators:
+# Alice Rose <heldinz@posteo.de>, 2015
+# Clara Adele von Randow <cvrandow@freenet.de>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: gs.group.messages.posts\n"
 "POT-Creation-Date: 2015-02-27 23:32+0000\n"
-"PO-Revision-Date: 2015-02-27 23:37+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: German (http://www.transifex.com/projects/p/gs-group-messages-posts/language/de/)\n"
+"PO-Revision-Date: 2015-07-28 09:23+0000\n"
+"Last-Translator: Clara Adele von Randow <cvrandow@freenet.de>\n"
+"Language-Team: German (http://www.transifex.com/groupserver/gs-group-messages-posts/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,89 +22,89 @@ msgstr ""
 #. Default: "All posts"
 #: ./browser/templates/poststab.pt:43
 msgid "all-posts-link"
-msgstr ""
+msgstr "Alle Beiträge"
 
 #. Default: "Author"
 #: ./browser/templates/ajax.pt:11
 msgid "author"
-msgstr ""
+msgstr "Autor"
 
 #. Default: "Date"
 #: ./browser/templates/ajax.pt:14
 msgid "date"
-msgstr ""
+msgstr "Datum"
 
 #. Default: "Files"
 #: ./browser/templates/ajax.pt:13
 msgid "files"
-msgstr ""
+msgstr "Datei"
 
 #. Default: "Group"
 #: ./browser/templates/posts.pt:72
 msgid "group-button"
-msgstr ""
+msgstr "Gruppe"
 
 #. Default: "Newer"
 #: ./browser/templates/posts.pt:65 ./browser/templates/poststab.pt:36
 msgid "newer-button"
-msgstr ""
+msgstr "neuer"
 
 #. Default: "There are no posts in this group."
 #: ./browser/templates/posts.pt:123
 msgid "no-posts"
-msgstr ""
+msgstr "Es gibt keine Beiträge in dieser Gruppe."
 
 #. Default: "Older"
 #: ./browser/templates/posts.pt:76 ./browser/templates/poststab.pt:58
 msgid "older-button"
-msgstr ""
+msgstr "älter"
 
 #. Default: "Posts in ${groupName}"
 #: ./browser/templates/posts.pt:86
 msgid "post-page-heading"
-msgstr ""
+msgstr "Beiträge in ${groupName}"
 
 #. Default: "Posts"
 #: ./browser/templates/posts.pt:58 ./poststab.py:26
 msgid "posts"
-msgstr ""
+msgstr "Beiträge"
 
 #. Default: "Posts in ${groupName}: ${siteName}"
 #: ./browser/templates/posts.pt:11
 msgid "posts-page-title"
-msgstr ""
+msgstr "Beiträge in ${groupName}: ${siteName}"
 
 #. Default: "${loadingIcon} Loading the posts…"
 #: ./browser/templates/poststab.pt:18
 msgid "posts-tab-loading"
-msgstr ""
+msgstr "${loadingIcon} Beiträge werden geladen..."
 
 #. Default: "There are no posts in this group."
 #: ./browser/templates/poststab.pt:30
 msgid "posts-tab-search-no-posts"
-msgstr ""
+msgstr "Es gibt keine Beiträge in dieser Gruppe."
 
 #. Default: "No posts were found."
 #: ./browser/templates/poststab.pt:26
 msgid "posts-tab-search-no-posts-found"
-msgstr ""
+msgstr "Keine Beiträge wurden gefunden."
 
 #. Default: "Search"
 #: ./browser/templates/poststab.pt:12
 msgid "search-button"
-msgstr ""
+msgstr "Suchen"
 
 #. Default: "Site home page"
 #: ./browser/templates/posts.pt:48
 msgid "site-home-link"
-msgstr ""
+msgstr "Startseite"
 
 #. Default: "Topic"
 #: ./browser/templates/ajax.pt:12
 msgid "topic"
-msgstr ""
+msgstr "Thema"
 
 #. Default: "Web feed"
 #: ./browser/templates/poststab.pt:52
 msgid "web-feed-link"
-msgstr ""
+msgstr "Web-Feed"
