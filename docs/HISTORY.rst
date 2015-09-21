@@ -1,6 +1,11 @@
 Changelog
 =========
 
+4.2.7 (2015-09-21)
+------------------
+
+* [DE] Updating the German translation, thanks to Cousin Clara
+
 4.2.6 (2015-04-28)
 ------------------
 
