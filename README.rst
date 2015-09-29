@@ -1,6 +1,6 @@
-===========================
-``gs.group.messages.posts``
-===========================
+===============================
+``gs.group.messages.post.list``
+===============================
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The list of posts in a group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -57,7 +57,7 @@ Resources
 =========
 
 - Code repository:
-  https://github.com/groupserver/gs.group.messages.posts/
+  https://github.com/groupserver/gs.group.messages.post.list/
 - Translations:
   https://www.transifex.com/projects/p/gs-group-messages-posts/
 - Questions and comments to
