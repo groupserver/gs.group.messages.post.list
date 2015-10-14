@@ -14,7 +14,7 @@
 ############################################################################
 from __future__ import absolute_import, unicode_literals
 from logging import getLogger
-log = getLogger('gs.group.messages.posts.postsview.PostsView')
+log = getLogger('gs.group.messages.post.list.postsview.PostsView')
 from zope.cachedescriptors.property import Lazy
 from gs.core import to_ascii
 from Products.XWFMailingListManager.queries import MessageQuery
@@ -38,11 +38,9 @@ class PostsView(GroupPage):
         nPosts = (self.end - self.start)
         if (nPosts > self.topNPosts):
             m = 'Request for %d posts (%d--%d) from %s (%s) on ' \
-                '%s (%s) is too high; returning %d.' % \
-                (nPosts, self.start, self.end, self.groupInfo.name,
-                 self.groupInfo.id, self.siteInfo.name,
-                 self.siteInfo.id, self.topNPosts)
-            log.warn(m)
+                '%s (%s) is too high; returning %d.'
+            log.warn(m, nPosts, self.start, self.end, self.groupInfo.name, self.groupInfo.id,
+                     self.siteInfo.name, self.siteInfo.id, self.topNPosts)
             self.end = self.start + self.topNPosts
 
     @Lazy
