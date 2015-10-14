@@ -61,7 +61,7 @@ Resources
 - Code repository:
   https://github.com/groupserver/gs.group.messages.post.list/
 - Translations:
-  https://www.transifex.com/projects/p/gs-group-messages-posts/
+  https://www.transifex.com/groupserver/gs-group-messages-post-list/
 - Questions and comments to
   http://groupserver.org/groups/development
 - Report bugs at https://redmine.iopen.net/projects/groupserver
@@ -81,6 +81,6 @@ Resources
 ..  [#ATOM]   The ATOM feed is rendered by the ``Products.GSSearch``
               product <https://github.com/groupserver/Products.GSSearch/>
 
-..  [#posts] Each post is displayed by the ``gs.group.messages.post``
+..  [#posts] Each post is displayed by the ``gs.group.messages.post.base``
              product
-             <https://github.com/groupserver/gs.group.messages.post/>
+             <https://github.com/groupserver/gs.group.messages.post.base/>
