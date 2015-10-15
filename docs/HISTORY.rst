@@ -1,6 +1,15 @@
 Changelog
 =========
 
+4.3.0 (2015-10-15)
+------------------
+
+* Renaming the product ``gs.group.messages.post.list``, to bring
+  it in with the refactor of `gs.group.messages.post.base`_
+
+.. _gs.group.messages.post.base:
+   https://github.com/groupserver/gs.group.messages.post.base/
+
 4.2.7 (2015-09-21)
 ------------------
 
@@ -28,7 +37,7 @@ Changelog
 * Pointing the product at Transifex_
 
 .. _Transifex:
-   https://www.transifex.com/projects/p/gs-group-messages-posts/
+   https://www.transifex.com/groupserver/gs-group-messages-post-list/
 
 4.2.3 (2014-10-10)
 ------------------
@@ -37,7 +46,7 @@ Changelog
   the reStructuredText files as such
 
 .. _GitHub:
-   https://github.com/groupserver/gs.group.messages.posts/
+   https://github.com/groupserver/gs.group.messages.post.list/
 
 4.2.2 (2014-06-24)
 ------------------
