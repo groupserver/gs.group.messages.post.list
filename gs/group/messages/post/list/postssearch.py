@@ -67,16 +67,20 @@ class PostsSearch(object):
 
     def author_for_post(self, post):
         uid = post['user_id']
-        authorInfo = self.authorCache.get(uid)
-        if not authorInfo:
-            authorInfo = createObject('groupserver.UserFromId',
-                                      self.context, uid)
-            authorInfo = {
-                'id': authorInfo.id,
-                'exists': not authorInfo.anonymous,
-                'url': to_ascii(authorInfo.url),
-                'name': authorInfo.name,
-            }
-            self.authorCache.add(uid, authorInfo)
-        assert type(authorInfo) == dict
-        return authorInfo
+        retval = self.authorCache.get(uid)
+        if not retval:
+            authorInfo = createObject('groupserver.UserFromId', self.context, uid)
+            retval = self.marshall_author_info(authorInfo)
+            self.authorCache.add(uid, retval)
+        assert type(retval) == dict
+        return retval
+
+    @staticmethod
+    def marshall_author_info(authorInfo):
+        retval = {
+            'id': authorInfo.id,
+            'exists': not authorInfo.anonymous,
+            'url': to_ascii(authorInfo.url),
+            'name': authorInfo.name,
+        }
+        return retval
